@@ -1,7 +1,5 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-
+## Overview: Compute and cache a matrix, and its inverted form
+## 
 
 ## function makeCacheMatrix creates a cache of a matrix
 makeCacheMatrix <- function(x = matrix()) {
@@ -23,21 +21,24 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## cacheSolve computes the inverse of the matrix of 'x', if it:
-##  is not in the cache, and has not changed. 
+## cacheSolve computes the inverse of the matrix of 'x', if it
+##  is not in the cache (assumes it has not changed)
 
 cacheSolve <- function(x, ...) {
     
-    m <- x$getimatrix()
+    m <- x$getimatrix() #get a copy of the inverted matrix from cache
     
-    if(!is.null(m)) {
+    # test if the cache returned anything, and has not changed
+    if(!is.null(m) {
       message("getting cached data")
-      return(m)
+      
+      return(m) #return the cached inverted matrix
     }
     
+    #at this point cache is empty, so compute inversion and store away for future use
     data <- x$get()
     m <- solve(data, ...) ## Return a matrix that is the inverse of 'x'
     x$setimatrix(m)
     
-    m  #return
+    m  #return inverted matrix
 }
